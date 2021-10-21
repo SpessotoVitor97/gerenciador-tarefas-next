@@ -13,7 +13,6 @@
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
     "mongoose": "^6.0.10",
-    "mongose": "^0.0.2-security",
     "next": "11.1.2",
     "node-sass": "^5.0.0",
     "react": "17.0.2",
