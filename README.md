@@ -6,7 +6,7 @@ Api -> https://codeshare.io/0gVB98
 Front -> https://codeshare.io/wnPKrJ
 
 ## Utils
-To run MongoDB in macOS -> mongod —dbpath 'meu caminho'
+To run MongoDB in macOS, when inside the directory to data -> mongod —dbpath 'meu caminho'
 
 To run project -> npm run dev
 
