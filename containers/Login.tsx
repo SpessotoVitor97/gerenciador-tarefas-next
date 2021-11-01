@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from 'axios';
 import { executeRequest } from "../services/api";
 import { NextPage } from "next";
 import { AccessTokenProps } from "../types/AccessTokenProps";
@@ -36,14 +35,14 @@ export const Login: NextPage<AccessTokenProps> = ({
                 localStorage.setItem('userMail', result.data.mail);
                 setToken(result.data.token);
             } else {
-                setError('Não foi possivel processar login, tente novamente');
+                setError('Não foi possível processar o login. Por favor, tente novamente');
             }
         } catch (e: any) {
             console.log(e);
             if (e?.response?.data?.error) {
                 setError(e?.response?.data?.error);
             } else {
-                setError('Não foi possivel processar login, tente novamente');
+                setError('Não foi possível processar o login. Por favor, tente novamente');
             }
         }
 

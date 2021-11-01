@@ -1,4 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
+
 import { dbConnect } from '../../middlewares/dbConnect';
 import { jwtValidator } from '../../middlewares/jwtValidator';
 import { TaskModel } from '../../models/TaskModel';
@@ -27,24 +28,24 @@ const handler = async ( req : NextApiRequest, res : NextApiResponse<DefaultRespo
                 break;
         }
 
-        return res.status(400).json({ error: 'Metodo informado nao esta disponivel.'});
+        return res.status(400).json({ error: 'O método informado não está disponível.'});
     }catch(e){
         console.log(e);
-        res.status(500).json({ error: 'Ocorreu erro ao gerenciar tarefas, tente novamente.'});
+        res.status(500).json({ error: 'Ocorreu erro ao gerenciar as tarefas, por favor tente novamente.'});
     }
 }
 
 const validateBody = (obj : TaskRequest, userId : string | null | undefined) => {
     if(!obj.name || obj.name.length < 3){
-        return 'Nome da tarefa invalido.';
+        return 'Nome da tarefa inválido.';
     }
 
     if(!userId){
-         return 'Usuario nao encontrado.';
+         return 'Usuário não encontrado.';
     }
 
     if(!obj.finishPrevisionDate){
-        return 'Data de previsao nao informada.';
+        return 'Data de previsão não informada.';
     }
 }
 
@@ -90,7 +91,7 @@ const updateTask = async ( req : NextApiRequest, res : NextApiResponse<DefaultRe
     
     const taskFound = await validateAndReturnTaskFound(req, userId);
     if(!taskFound){
-        return res.status(400).json({ error: 'Tarefa nao encontrada'});
+        return res.status(400).json({ error: 'Tarefa não encontrada'});
     }
 
     const msgValidation = validateBody(obj, userId);
@@ -109,7 +110,7 @@ const updateTask = async ( req : NextApiRequest, res : NextApiResponse<DefaultRe
 const deleteTask = async ( req : NextApiRequest, res : NextApiResponse<DefaultResponse>, userId : string | null | undefined) => {
     const taskFound = await validateAndReturnTaskFound(req, userId);
     if(!taskFound){
-        return res.status(400).json({ error: 'Tarefa nao encontrada'});
+        return res.status(400).json({ error: 'Tarefa não encontrada'});
     }
 
     await TaskModel.findByIdAndDelete({ _id : taskFound._id});

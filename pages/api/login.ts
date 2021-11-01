@@ -1,10 +1,11 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import { UserModel } from '../../models/UserModel';
-import { DefaultResponse } from '../../types/DefaultResponse';
 import md5 from 'md5';
-import { User } from '../../types/Users';
-import { dbConnect } from '../../middlewares/dbConnect';
 import jwt from 'jsonwebtoken';
+
+import { DefaultResponse } from '../../types/DefaultResponse';
+import { User } from '../../types/Users';
+import { UserModel } from '../../models/UserModel';
+import { dbConnect } from '../../middlewares/dbConnect';
 
 type LoginRequest = {
     login : string
@@ -20,12 +21,12 @@ type LoginResponse = {
 const handler = async ( req : NextApiRequest, res : NextApiResponse<DefaultResponse | LoginResponse>) => {
     try{
         if(req.method !== 'POST' || !req.body){
-            return res.status(400).json({ error: 'Metodo informado nao esta disponivel.'});
+            return res.status(400).json({ error: 'O método informado não está disponível.'});
         }
 
         const {MY_SECRET_KEY} = process.env;
         if(!MY_SECRET_KEY){
-            return res.status(500).json({error : 'Env MY_SECRET_KEY nao definida'});
+            return res.status(500).json({error : 'Env MY_SECRET_KEY não definida'});
         }
         
         const obj : LoginRequest = req.body;
@@ -38,10 +39,10 @@ const handler = async ( req : NextApiRequest, res : NextApiResponse<DefaultRespo
             }
         }
 
-        return res.status(400).json({ error: 'Parametros de entrada invalido.'});
+        return res.status(400).json({ error: 'Parâmetros de entrada inválidos.'});
     }catch(e){
         console.log(e);
-        res.status(500).json({ error: 'Ocorreu erro ao efetuar login, tente novamente.'});
+        res.status(500).json({ error: 'Ocorreu um erro ao efetuar o login. Por favor, tente novamente.'});
     }
 } 
 

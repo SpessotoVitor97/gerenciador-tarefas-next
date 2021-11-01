@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from 'next';
-import { DefaultResponse } from '../types/DefaultResponse';
 import NextCors from 'nextjs-cors';
+
+import { DefaultResponse } from '../types/DefaultResponse';
 
 const corsPolicy = (handler: NextApiHandler) =>
     async (req: NextApiRequest, res: NextApiResponse<DefaultResponse>) => {

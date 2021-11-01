@@ -1,12 +1,14 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { Filter } from "../components/Filter";
-import { Footer } from "../components/Footer";
 
 import { Header } from "../components/Header";
+import { Filter } from "../components/Filter";
 import { List } from "../components/List";
+import { Footer } from "../components/Footer";
+
 import { executeRequest } from "../services/api";
+
 import { AccessTokenProps } from "../types/AccessTokenProps";
 import { Task } from "../types/Task";
 
@@ -93,7 +95,7 @@ const Home: NextPage<AccessTokenProps> = ({
             if (e?.response?.data?.error) {
                 setMsgErro(e?.response?.data?.error);
             } else {
-                setMsgErro('Não foi possivel cadastrar tarefa, tente novamente');
+                setMsgErro('Não foi possível cadastrar a tarefa. Por favor, tente novamente.');
             }
         }
 
