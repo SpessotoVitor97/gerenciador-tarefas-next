@@ -37,8 +37,9 @@ body {
 @import './list.scss';
 @import './item.scss';
 @import './modal.scss';
+@import './register.scss';
 
-button{
+button {
     display: block;
     border: none;
     background-color: $primaryColor;

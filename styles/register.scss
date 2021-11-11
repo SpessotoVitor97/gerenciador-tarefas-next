@@ -68,6 +68,15 @@
         margin-top: 30px;
     }
 
+    .secondary-button {
+        width: 100%;
+        height: 56px;
+        margin-top: 30px;
+        color: $primaryColor;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
     .loading {
         background-color: $mediumGreyColor;
     }

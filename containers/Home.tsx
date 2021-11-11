@@ -9,11 +9,11 @@ import { Footer } from "../components/Footer";
 
 import { executeRequest } from "../services/api";
 
-import { AccessTokenProps } from "../types/AccessTokenProps";
+import { HomeProps } from "../types/HomeProps";
 import { Task } from "../types/Task";
 
 /* eslint-disable @next/next/no-img-element */
-const Home: NextPage<AccessTokenProps> = ({
+const Home: NextPage<HomeProps> = ({
     setToken
 }) => {
 
@@ -50,6 +50,7 @@ const Home: NextPage<AccessTokenProps> = ({
             }
 
             const result = await executeRequest('task' + query, 'GET');
+
             if (result && result.data) {
                 setTasks(result.data);
             }
@@ -86,6 +87,7 @@ const Home: NextPage<AccessTokenProps> = ({
             }
 
             const result = await executeRequest('task', 'POST', body);
+
             if (result && result.data) {
                 await getListaFiltrada();
                 closeModal();
@@ -98,7 +100,6 @@ const Home: NextPage<AccessTokenProps> = ({
                 setMsgErro('Não foi possível cadastrar a tarefa. Por favor, tente novamente.');
             }
         }
-
         setLoading(false);
     }
 
