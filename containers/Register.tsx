@@ -2,57 +2,56 @@ import { useState } from "react";
 import { NextPage } from "next";
 
 import { executeRequest } from "../services/api";
+import { RegisterProps } from "../types/RegisterProps";
 import { LoginProps } from "../types/LoginProps";
 
 /* eslint-disable @next/next/no-img-element */
-export const Login: NextPage<LoginProps> = ({
-    setToken,
+export const Register: NextPage<RegisterProps> = ({
     setRegister
 }) => {
-
-    const [login, setLogin] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setLoading] = useState(false);
 
-    const doLogin = async () => {
+    const doRegister = async () => {
         try {
             setLoading(true);
             setError('');
-            if (!login && !password) {
-                setError('Favor informar email e senha');
+
+            if (!name && !email && !password) {
+                setError('Favor informar nome, email e senha');
                 setLoading(false);
                 return;
             }
 
             const body = {
-                login,
+                name,
+                email,
                 password
             }
 
-            const result = await executeRequest('login', 'POST', body);
+            const result = await executeRequest('user', 'POST', body);
 
             if (result && result.data) {
-                localStorage.setItem('accessToken', result.data.token);
-                localStorage.setItem('userName', result.data.name);
-                localStorage.setItem('userMail', result.data.mail);
-                setToken(result.data.token);
+                setRegister('');
             } else {
-                setError('Não foi possível realizar o login. Por favor, tente novamente');
+                setError('Não foi possível criar o usuário. Por favor, tente novamente');
             }
         } catch (e: any) {
             console.log(e);
             if (e?.response?.data?.error) {
                 setError(e?.response?.data?.error);
             } else {
-                setError('Não foi possível realizar o login. Por favor, tente novamente');
+                setError('Não foi possível criar o usuário. Por favor, tente novamente');
             }
         }
         setLoading(false);
     }
-
-    const goToRegister = () => {
-        setRegister('Registrar');
+    
+    const goToLogin = () => {
+        setRegister('')
     }
 
     return (
@@ -61,21 +60,26 @@ export const Login: NextPage<LoginProps> = ({
             <form>
                 <p className="error">{error}</p>
                 <div className="input">
+                    <img src="/user.svg" alt="Informe seu nome completo" />
+                    <input type="text" placeholder="Nome completo"
+                        value={name} onChange={evento => setName(evento.target.value)} />
+                </div>
+                <div className="input">
                     <img src="/mail.svg" alt="Informe seu email" />
                     <input type="text" placeholder="Informe seu email"
-                        value={login} onChange={evento => setLogin(evento.target.value)} />
+                        value={email} onChange={evento => setEmail(evento.target.value)} />
                 </div>
                 <div className="input">
                     <img src="/lock.svg" alt="Informe sua senha" />
                     <input type="password" placeholder="Informe sua senha"
                         value={password} onChange={evento => setPassword(evento.target.value)} />
                 </div>
-                <button type="button" onClick={doLogin} disabled={isLoading}
+                <button type="button" onClick={doRegister} disabled={isLoading}
                     className={isLoading ? 'loading' : ''}>
-                    {isLoading ? '...Carregando' : 'Login'}
+                    {isLoading ? '...Carregando' : 'Registrar'}
                 </button>
-                <button type="button" onClick={goToRegister}
-                    className="secondary-button">Registrar
+                <button type="button" onClick={goToLogin} disabled={isLoading}
+                    className="secondary-button">Cancelar
                 </button>
             </form>
         </div>
