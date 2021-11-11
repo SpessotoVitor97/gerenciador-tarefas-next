@@ -5,7 +5,7 @@ import { Task } from "../types/Task";
 
 type ItemProps = {
     task : Task
-    setTaskAndShow(task:Task) : void
+    setTaskAndShow(task: Task) : void
 }
 
 const Item: NextPage<ItemProps> = ({
@@ -13,14 +13,14 @@ const Item: NextPage<ItemProps> = ({
     setTaskAndShow
 }) => {
 
-    const getDateText = (finishDate : any, finishPrevisionDate : any) => {
-        if(finishDate){
+    const getDateText = (finishDate: any, finishPrevisionDate: any) => {
+        if(finishDate) {
             const fd = new Date(finishDate)
-            return `Concluido em: ${fd.getDate() + '/' + (fd.getMonth()+1) + '/' + fd.getFullYear()}`;
+            return `Concluido em: ${(fd.getDate()+1) + '/' + (fd.getMonth()+1) + '/' + fd.getFullYear()}`;
         }
         
         const fpd = new Date(finishPrevisionDate)
-        return `Previsao de conclusao em: ${fpd.getDate() + '/' + (fpd.getMonth()+1) + '/' + fpd.getFullYear()}`;
+        return `Previsao de conclusao em: ${(fpd.getDate()+1) + '/' + (fpd.getMonth()+1) + '/' + fpd.getFullYear()}`;
     }
 
     return (

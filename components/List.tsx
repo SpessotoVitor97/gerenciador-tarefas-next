@@ -62,7 +62,11 @@ const List: NextPage<ListProps> = ({
                 body.finishDate = finishDate;
             }
 
+            console.log(_id);
+            console.log(body);
+            
             const result = await executeRequest('task?id='+_id, 'PUT', body);
+
             if (result && result.data) {
                 await getListaFiltrada();
                 closeModal();
