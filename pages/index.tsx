@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { Login } from '../containers/Login';
 import { Home } from '../containers/Home';
-import { Register } from '../containers/rEGISTER'
+import { Register } from '../containers/Register'
 
 const Index: NextPage = () => {
   const [accessToken, setToken] = useState('');
